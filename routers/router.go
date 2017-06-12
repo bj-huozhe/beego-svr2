@@ -19,7 +19,7 @@ func init() {
 	    beego.NSRouter("/AddOrderInfo", &controllers.BusinessController{}, "post:AddOrderInfo"),
 	    )
 	FindById := beego.NewNamespace("/business",
-	    beego.NSRouter("/FindById", &controllers.BusinessController{}, "get:FindById"),
+	    beego.NSRouter("/FindById/:id([0-9]+", &controllers.BusinessController{}, "get:FindById"),
 	    )
 	beego.AddNamespace(AddOrderInfo,FindById)
 }
