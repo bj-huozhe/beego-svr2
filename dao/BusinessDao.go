@@ -19,3 +19,20 @@ func Add(orderInfo models.OrderInfo) {
 	}
 }
 
+
+func FindById(id int) models.OrderInfo {
+	orderInfoDao := orm.NewOrm()
+	orderInfoDao.Using("trade")
+	err := orderInfoDao.Begin()
+	orderInfo := new(models.OrderInfo)
+	orderInfo.Id = id
+	err = orderInfoDao.Read(&orderInfo)
+	fmt.Println("err=", err)
+	if err != nil {
+		orderInfoDao.Rollback()
+	} else {
+		orderInfoDao.Commit()
+	}
+	return orderInfo
+}
+

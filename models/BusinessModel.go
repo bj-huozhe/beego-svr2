@@ -6,18 +6,18 @@ import (
 )
 
 type OrderInfo struct {
-	Id int32  `primary key Id`
+	Id int  `primary key Id`
 	Name string  `Name`
-	Age int32 `Age`
+	Age int `Age`
 	Create_time time.Time
 	Update_time time.Time
-	Version int32  `version `
+	Version int  `version `
 }
 
 type OrderInfoVo struct {
-	Id int32  `primary key Id`
+	Id int  `primary key Id`
 	Name string  `Name`
-	Age int32 `Age`
+	Age int `Age`
 }
 
 

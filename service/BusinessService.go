@@ -11,3 +11,19 @@ func AddOrderInfo(orderInfoVo models.OrderInfoVo){
 	dao.Add(orderInfo)
 }
 
+func FindById(id int) models.OrderInfo{
+	orderInfo := dao.FindById(id)
+	return orderInfo
+}
+
+
+
+
+
+
+
+
+
+
+
+
