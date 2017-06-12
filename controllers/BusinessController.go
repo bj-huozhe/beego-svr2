@@ -6,7 +6,6 @@ import (
 	"beego-svr2/models"
 	"beego-svr2/service"
 	"fmt"
-	"strconv"
 )
 
 
@@ -29,13 +28,16 @@ func (business *BusinessController) AddOrderInfo() {
 
 
 func (business *BusinessController) FindById() interface{}  {
-	id := business.Ctx.Input.Param(":id")
-	fmt.Printf("id=", id)
-
-    	pid, err := strconv.Atoi(id)
+	id, err := business.GetInt("id")
+	fmt.Printf("err=", err)
 	if err != nil {
-		panic("AAA")
-	}
-	orderInfo := service.FindById(pid)
+			panic(err)
+		}
+	fmt.Printf("id=", id)
+    	//pid, err := strconv.Atoi(id)
+	//if err != nil {
+	//	panic("AAA")
+	//}
+	orderInfo := service.FindById(id)
 	return orderInfo
 }
