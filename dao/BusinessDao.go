@@ -20,7 +20,7 @@ func Add(orderInfo models.OrderInfo) {
 }
 
 
-func FindById(id int) models.OrderInfo {
+func FindById(id int) interface{}  {
 	orderInfoDao := orm.NewOrm()
 	orderInfoDao.Using("trade")
 	err := orderInfoDao.Begin()
@@ -33,6 +33,6 @@ func FindById(id int) models.OrderInfo {
 	} else {
 		orderInfoDao.Commit()
 	}
-	return orderInfo
+	return &orderInfo
 }
 

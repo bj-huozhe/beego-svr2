@@ -28,8 +28,10 @@ func (business *BusinessController) AddOrderInfo() {
 
 
 
-func (business *BusinessController) FindById() {
+func (business *BusinessController) FindById() interface{}  {
 	id := business.Ctx.Input.Param(":id")
+	fmt.Printf("id=", id)
+
     	pid, err := strconv.Atoi(id)
 	if err != nil {
 		panic("AAA")

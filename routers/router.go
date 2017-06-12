@@ -18,7 +18,9 @@ func init() {
 	beego.Router("/business/order", &controllers.BusinessController{}, "post:AddOrderInfo")
 	webns := beego.NewNamespace("/business",
 	    beego.NSRouter("/AddOrderInfo", &controllers.BusinessController{}, "post:AddOrderInfo"),
+	    )
+	FindById := beego.NewNamespace("/business",
 	    beego.NSRouter("/FindById", &controllers.BusinessController{}, "get:FindById"),
 	    )
-	beego.AddNamespace(webns)
+	beego.AddNamespace(webns,FindById)
 }

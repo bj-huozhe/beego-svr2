@@ -11,7 +11,7 @@ func AddOrderInfo(orderInfoVo models.OrderInfoVo){
 	dao.Add(orderInfo)
 }
 
-func FindById(id int) models.OrderInfo{
+func FindById(id int) interface{} {
 	orderInfo := dao.FindById(id)
 	return orderInfo
 }
