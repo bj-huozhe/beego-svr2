@@ -3,7 +3,7 @@
 go get github.com/astaxie/beego
 go get github.com/beego/bee
 
-bee api beego-svr1
+bee api beego-svr2
 
 bee run
 
