@@ -26,8 +26,8 @@ func Test_AddLendUser(t *testing.T) {
 	}
 
 	header := make(map[string]string)
-	header["Cookie"] = "rules_session_id=64b713c52c7511e6a4519801a7928995"
-	header["RRDSource"] = "YM"
+	header["Cookie"] = "JSESSION:1245566"
+	header["RRDSource"] = "BBC"
 	//result := common.HttpPost(request, header, httpUrl)
 	result := common.HttpPostJson(string(json), header, httpUrl)
 	fmt.Println("result=", result)
