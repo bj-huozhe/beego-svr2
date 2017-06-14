@@ -4,6 +4,7 @@ import (
 	"beego-svr2/models"
 	"beego-svr2/dao"
 	"time"
+	"beego-svr2/util"
 )
 
 func AddOrderInfo(orderInfoVo models.OrderInfoVo){
@@ -13,6 +14,7 @@ func AddOrderInfo(orderInfoVo models.OrderInfoVo){
 
 func FindById(id int) interface{} {
 	orderInfo := dao.FindById(id)
+	common.ConsoleLogs.Info(".....orderInfo=", orderInfo)
 	return orderInfo
 }
 

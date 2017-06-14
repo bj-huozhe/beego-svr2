@@ -42,6 +42,7 @@ func (this *BusinessController) FindById() interface{}{
 	//}
 	orderInfo := service.FindById(id)
 	json, err := json.Marshal(orderInfo)
+	common.ConsoleLogs.Info("json=", json)
 	if err != nil {
 	    fmt.Println("error:", err)
 	}
