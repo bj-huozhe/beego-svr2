@@ -45,6 +45,6 @@ func (business *BusinessController) FindById()  {
 	if err != nil {
 	    fmt.Println("error:", err)
 	}
-	business.Ctx.WriteString(json)
+	business.Ctx.WriteString(string(json))
 	//return orderInfo
 }
