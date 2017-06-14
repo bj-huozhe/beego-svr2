@@ -6,7 +6,7 @@ import (
 	"beego-svr2/models"
 	"beego-svr2/service"
 	"fmt"
-	"strconv"
+	"beego-svr2/util"
 )
 
 
@@ -19,7 +19,7 @@ type BusinessController struct {
 func (business *BusinessController) AddOrderInfo() {
 	var orderInfoVo models.OrderInfoVo
 	json.Unmarshal(business.Ctx.Input.RequestBody, &orderInfoVo)
-	fmt.Printf("orderInfoVo=", orderInfoVo)
+	common.ConsoleLogs.Info("orderInfoVo=", orderInfoVo)
 	business.Data["json"] = orderInfoVo
 	business.ServeJSON()
 	service.AddOrderInfo(orderInfoVo)
@@ -28,23 +28,26 @@ func (business *BusinessController) AddOrderInfo() {
 
 
 
-func (business *BusinessController) FindById()  {
+func (this *BusinessController) FindById() interface{}{
 	//id, err := business.GetInt("id")
-	id, err:= strconv.Atoi(business.Ctx.Input.Param(":id"))
-	fmt.Printf("err=", err)
+	id, err:= this.GetInt("id")
+	common.ConsoleLogs.Info("err=", err)
 	if err != nil {
 			panic(err)
 		}
-	fmt.Printf("id=", id)
+	common.ConsoleLogs.Info("id=", id)
     	//pid, err := strconv.Atoi(id)
 	//if err != nil {
 	//	panic("AAA")
 	//}
 	orderInfo := service.FindById(id)
 	json, err := json.Marshal(orderInfo)
+	common.ConsoleLogs.Info("json=", json)
 	if err != nil {
 	    fmt.Println("error:", err)
 	}
-	business.Ctx.WriteString(string(json))
+	this.Ctx.WriteString(string(json))
 	//return orderInfo
+	//business.Ctx.WriteString(json)
+	return json
 }
