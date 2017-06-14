@@ -5,15 +5,16 @@ import (
 	"beego-svr2/dao"
 	"time"
 	"beego-svr2/util"
+	"beego-svr2/pojo/request"
 )
 
-func AddOrderInfo(orderInfoVo models.OrderInfoVo){
+func AddOrderInfo(orderInfoVo request.OrderInfoVo){
 	orderInfo := models.OrderInfo{Name:orderInfoVo.Name,Age:orderInfoVo.Age,Create_time:time.Now(), Update_time:time.Now(),Version:0}
-	dao.Add(orderInfo)
+	dao.AddOrderInfo(orderInfo)
 }
 
-func FindById(id int) interface{} {
-	orderInfo := dao.FindById(id)
+func FindOrderById(id int) interface{} {
+	orderInfo := dao.FindOrderById(id)
 	common.ConsoleLogs.Info(".....orderInfo=", orderInfo)
 	return orderInfo
 }

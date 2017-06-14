@@ -3,32 +3,32 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"encoding/json"
-	"beego-svr2/models"
 	"beego-svr2/service"
-	"fmt"
 	"beego-svr2/util"
+	"beego-svr2/pojo/request"
 )
 
 
 // Operations about Users
-type BusinessController struct {
+type OrderController struct {
 	beego.Controller
 }
 
 
-func (business *BusinessController) AddOrderInfo() {
-	var orderInfoVo models.OrderInfoVo
-	json.Unmarshal(business.Ctx.Input.RequestBody, &orderInfoVo)
+func (this *OrderController) AddOrderInfo() {
+	var orderInfoVo request.OrderInfoVo
+	json.Unmarshal(this.Ctx.Input.RequestBody, &orderInfoVo)
 	common.ConsoleLogs.Info("orderInfoVo=", orderInfoVo)
-	business.Data["json"] = orderInfoVo
-	business.ServeJSON()
+	this.Data["json"] = orderInfoVo
+	this.ServeJSON()
 	service.AddOrderInfo(orderInfoVo)
 }
 
 
 
 
-func (this *BusinessController) FindById() interface{}{
+func (this *OrderController) FindOrderById() string{
+	var result string
 	//id, err := business.GetInt("id")
 	id, err:= this.GetInt("id")
 	common.ConsoleLogs.Info("err=", err)
@@ -36,18 +36,16 @@ func (this *BusinessController) FindById() interface{}{
 			panic(err)
 		}
 	common.ConsoleLogs.Info("id=", id)
-    	//pid, err := strconv.Atoi(id)
-	//if err != nil {
-	//	panic("AAA")
-	//}
-	orderInfo := service.FindById(id)
+	orderInfo := service.FindOrderById(id)
 	json, err := json.Marshal(orderInfo)
 	common.ConsoleLogs.Info("json=", json)
 	if err != nil {
-	    fmt.Println("error:", err)
+	    common.ConsoleLogs.Error("error:", err)
 	}
-	this.Ctx.WriteString(string(json))
+	result = string(json)
+	common.ConsoleLogs.Info("result=", result)
+	//this.Ctx.WriteString(string(json))
 	//return orderInfo
 	//business.Ctx.WriteString(json)
-	return json
+	return result
 }

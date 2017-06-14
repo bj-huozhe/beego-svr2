@@ -15,15 +15,25 @@ import (
 
 func init() {
 
-	api_ns := beego.NewNamespace("/business",
-		beego.NSRouter("/AddOrderInfo", &controllers.BusinessController{}, "post:AddOrderInfo"),
-		beego.NSRouter("/FindById", &controllers.BusinessController{}, "get:FindById"),
+	order_info_ns := beego.NewNamespace("/order",
+		beego.NSRouter("/AddOrderInfo", &controllers.OrderController{}, "post:AddOrderInfo"),
+		beego.NSRouter("/FindOrderById", &controllers.OrderController{}, "get:FindOrderById"),
 	)
-	//FindById := beego.NewNamespace("/business",
-	//    //beego.NSRouter("/FindById/:id([0-9]+", &controllers.BusinessController{}, "get:FindById"),
-	//    beego.NSRouter("/FindById/:id", &controllers.BusinessController{}, "get:FindById"),
-	//    )
-	beego.AddNamespace(api_ns)
-	//beego.AddNamespace(FindById)
-	//beego.Router("/FindById/?:id", &controllers.BusinessController{}, "*:FindById")
+	team_info_ns := beego.NewNamespace("/team",
+		beego.NSRouter("/AddTeamInfo", &controllers.TeamController{}, "post:AddTeamInfo"),
+		beego.NSRouter("/FindTeamById", &controllers.TeamController{}, "get:FindTeamById"),
+	)
+
+	lend_info_ns := beego.NewNamespace("/lend",
+		beego.NSRouter("/AddLendInfo", &controllers.LendController{}, "post:AddLendInfo"),
+		beego.NSRouter("/FindLendInfoById", &controllers.LendController{}, "get:FindLendInfoById"),
+	)
+
+	lend_user_ns := beego.NewNamespace("/lendUser",
+		beego.NSRouter("/AddLendUser", &controllers.LendUserController{}, "post:AddLendUser"),
+		beego.NSRouter("/FindLendUserById", &controllers.LendUserController{}, "get:FindLendUserById"),
+	)
+
+	beego.AddNamespace(order_info_ns, team_info_ns, lend_info_ns, lend_user_ns)
+
 }

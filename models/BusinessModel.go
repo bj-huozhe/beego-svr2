@@ -14,10 +14,38 @@ type OrderInfo struct {
 	Version int  `version `
 }
 
-type OrderInfoVo struct {
+type TeamInfo struct {
 	Id int  `primary key Id`
-	Name string  `Name`
-	Age int `Age`
+	TeamName string  `team_name`
+	OrderId int `order_id`
+	CreateTime time.Time
+	UpdateTime time.Time
+	Version int  `version `
+}
+
+type LendInfo struct {
+	Id int  `primary key Id`
+	LendId string  `lend_id`
+	RequestContent string  `request_content`
+	ResponseContent string  `response_content`
+	Status string  `status`
+	UserId int `user_id`
+	CreateTime time.Time
+	UpdateTime time.Time
+	Version int  `version `
+}
+
+type LendUser struct {
+	Id int  `primary key Id`
+	LendId string  `LendId`
+	UserName string  `user_name`
+	Email string  `email`
+	Age int `age`
+	IdNo string  `id_no`
+	UserId int `user_id`
+	CreateTime time.Time
+	UpdateTime time.Time
+	Version int  `version `
 }
 
 
@@ -25,7 +53,7 @@ type OrderInfoVo struct {
 
 func RegisterDB() {
     //注册 model
-    orm.RegisterModel(new(OrderInfo))
+    orm.RegisterModel(new(OrderInfo),new(TeamInfo), new(LendInfo), new(LendUser))
     //注册驱动
     orm.RegisterDriver("mysql", orm.DRMySQL)
     //注册默认数据库
