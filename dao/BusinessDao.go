@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"beego-svr2/models"
 	"fmt"
+	"beego-svr2/util"
 )
 
 func Add(orderInfo models.OrderInfo) {
@@ -21,18 +22,20 @@ func Add(orderInfo models.OrderInfo) {
 
 
 func FindById(id int) interface{}  {
+	common.ConsoleLogs.Info("OrderInfoDao--id=", id)
 	orderInfoDao := orm.NewOrm()
-	orderInfoDao.Using("trade")
+	orderInfoDao.Using("default")
 	err := orderInfoDao.Begin()
-	orderInfo := new(models.OrderInfo)
-	orderInfo.Id = id
+	orderInfo := models.OrderInfo{Id:id}
+	common.ConsoleLogs.Info("orderInfo=", orderInfo)
 	err = orderInfoDao.Read(&orderInfo)
-	fmt.Println("err=", err)
+	common.ConsoleLogs.Info("orderInfo=", orderInfo)
+	common.ConsoleLogs.Info("err=", err)
 	if err != nil {
 		orderInfoDao.Rollback()
 	} else {
 		orderInfoDao.Commit()
 	}
-	return &orderInfo
+	return orderInfo
 }
 

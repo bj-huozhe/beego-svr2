@@ -37,7 +37,7 @@ gopm get github.com/smartystreets/goconvey
 go get github.com/smartystreets/goconvey
 
 
-
+go get github.com/astaxie/beego/logs
 
 
 

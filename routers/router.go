@@ -15,11 +15,15 @@ import (
 
 func init() {
 
-	AddOrderInfo := beego.NewNamespace("/business",
-	    beego.NSRouter("/AddOrderInfo", &controllers.BusinessController{}, "post:AddOrderInfo"),
-	    )
-	FindById := beego.NewNamespace("/business",
-	    beego.NSRouter("/FindById/:id([0-9]+", &controllers.BusinessController{}, "get:FindById"),
-	    )
-	beego.AddNamespace(AddOrderInfo,FindById)
+	api_ns := beego.NewNamespace("/business",
+		beego.NSRouter("/AddOrderInfo", &controllers.BusinessController{}, "post:AddOrderInfo"),
+		beego.NSRouter("/FindById", &controllers.BusinessController{}, "get:FindById"),
+	)
+	//FindById := beego.NewNamespace("/business",
+	//    //beego.NSRouter("/FindById/:id([0-9]+", &controllers.BusinessController{}, "get:FindById"),
+	//    beego.NSRouter("/FindById/:id", &controllers.BusinessController{}, "get:FindById"),
+	//    )
+	beego.AddNamespace(api_ns)
+	//beego.AddNamespace(FindById)
+	//beego.Router("/FindById/?:id", &controllers.BusinessController{}, "*:FindById")
 }
