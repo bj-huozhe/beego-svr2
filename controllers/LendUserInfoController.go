@@ -50,4 +50,36 @@ func (this *LendUserController) FindLendUserById() string {
 
 
 
+func (this *LendUserController) FindLendUserAll() string{
+	var result string
+	lendUserList := service.FindLendUserAll()
+	json, err := json.Marshal(lendUserList)
+	common.ConsoleLogs.Info("json=", json)
+	if err != nil {
+	    common.ConsoleLogs.Error("error:", err)
+	}
+	result = string(json)
+	common.ConsoleLogs.Info("result=", result)
+	this.Ctx.WriteString(result)
+	//return orderInfo
+	//business.Ctx.WriteString(json)
+	return result
+}
+
+
+func (this *LendUserController) UpdateLendUser() {
+	var lendUserVo request.LendUserVo
+	json.Unmarshal(this.Ctx.Input.RequestBody, &lendUserVo)
+	common.ConsoleLogs.Info("lendUserVo=", lendUserVo)
+	this.Data["json"] = lendUserVo
+	this.ServeJSON()
+	service.UpdateLendUser(lendUserVo)
+}
+
+
+
+
+
+
+
 

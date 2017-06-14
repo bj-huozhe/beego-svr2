@@ -38,3 +38,45 @@ func Test_FindTeamById(t *testing.T) {
 	result := common.HttpGet(httpUrl)
 	fmt.Println("result=", result)
 }
+
+
+func Test_FindTeamAll(t *testing.T) {
+	httpUrl := "http://localhost:8100/team/FindTeamAll"
+	result := common.HttpGet(httpUrl)
+	fmt.Println("result=", result)
+}
+
+
+func Test_UpdateTeam(t *testing.T) {
+	httpUrl := "http://localhost:8100/team/UpdateTeam"
+	request := make(map[string]interface{})
+	request["Id"] = 2
+	request["lendId"] = uuid.GetGuid()
+	request["TeamName"] = "COFFEE"
+	request["OrderId"] = 48
+	request["Version"] = 3
+
+	json, err := json.Marshal(request)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+
+	header := make(map[string]string)
+	header["Cookie"] = "rules_session_id=64b713c52c7511e6a4519801a7928995"
+	header["RRDSource"] = "YM"
+	//result := common.HttpPost(request, header, httpUrl)
+	result := common.HttpPostJson(string(json), header, httpUrl)
+	fmt.Println("result=", result)
+}
+
+
+
+
+
+
+
+
+
+
+
+

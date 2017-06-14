@@ -6,6 +6,8 @@ type LendInfoVo struct {
 	LendId string  `LendId`
 	RequestContent string  `RequestContent`
 	ResponseContent string  `ResponseContent`
+	Status string  `Status`
 	UserId int `UserId`
+	Version int `Version`
 }
 

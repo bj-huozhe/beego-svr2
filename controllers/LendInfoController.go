@@ -50,10 +50,31 @@ func (this *LendController) FindLendInfoById() string {
 
 
 
+func (this *LendController) FindLendInfoAll() string{
+	var result string
+	lendInfoList := service.FindLendInfoAll()
+	json, err := json.Marshal(lendInfoList)
+	common.ConsoleLogs.Info("json=", json)
+	if err != nil {
+	    common.ConsoleLogs.Error("error:", err)
+	}
+	result = string(json)
+	common.ConsoleLogs.Info("result=", result)
+	this.Ctx.WriteString(result)
+	//return orderInfo
+	//business.Ctx.WriteString(json)
+	return result
+}
 
 
-
-
+func (this *LendController) UpdateLendInfo() {
+	var lendInfoVo request.LendInfoVo
+	json.Unmarshal(this.Ctx.Input.RequestBody, &lendInfoVo)
+	common.ConsoleLogs.Info("lendInfoVo=", lendInfoVo)
+	this.Data["json"] = lendInfoVo
+	this.ServeJSON()
+	service.UpdateLendInfo(lendInfoVo)
+}
 
 
 

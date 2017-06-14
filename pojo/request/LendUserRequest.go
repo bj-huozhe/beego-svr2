@@ -9,5 +9,6 @@ type LendUserVo struct {
 	Age int  `Age`
 	IdNo string  `IdNo`
 	UserId int `UserId`
+	Version int `Version`
 }
 

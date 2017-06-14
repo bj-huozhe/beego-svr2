@@ -6,5 +6,6 @@ type TeamInfoVo struct {
 	lendId string  `lendId`
 	TeamName string  `TeamName`
 	OrderId int `OrderId`
+	Version int `Version`
 }
 

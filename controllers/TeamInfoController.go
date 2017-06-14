@@ -45,3 +45,49 @@ func (this *TeamController) FindTeamById() string {
 	//business.Ctx.WriteString(json)
 	return result
 }
+
+
+func (this *TeamController) FindTeamAll() string{
+	var result string
+	teamInfoList := service.FindTeamAll()
+	json, err := json.Marshal(teamInfoList)
+	common.ConsoleLogs.Info("json=", json)
+	if err != nil {
+	    common.ConsoleLogs.Error("error:", err)
+	}
+	result = string(json)
+	common.ConsoleLogs.Info("result=", result)
+	this.Ctx.WriteString(result)
+	//return orderInfo
+	//business.Ctx.WriteString(json)
+	return result
+}
+
+
+
+func (this *TeamController) UpdateTeam() {
+	var teamInfoVo request.TeamInfoVo
+	json.Unmarshal(this.Ctx.Input.RequestBody, &teamInfoVo)
+	common.ConsoleLogs.Info("teamInfoVo=", teamInfoVo)
+	this.Data["json"] = teamInfoVo
+	this.ServeJSON()
+	service.UpdateTeam(teamInfoVo)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

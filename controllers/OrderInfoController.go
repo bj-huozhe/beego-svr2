@@ -49,3 +49,41 @@ func (this *OrderController) FindOrderById() string{
 	//business.Ctx.WriteString(json)
 	return result
 }
+
+
+func (this *OrderController) FindOrderAll() string{
+	var result string
+	orderInfoList := service.FindOrderAll()
+	json, err := json.Marshal(orderInfoList)
+	common.ConsoleLogs.Info("json=", json)
+	if err != nil {
+	    common.ConsoleLogs.Error("error:", err)
+	}
+	result = string(json)
+	common.ConsoleLogs.Info("result=", result)
+	this.Ctx.WriteString(result)
+	//return orderInfo
+	//business.Ctx.WriteString(json)
+	return result
+}
+
+func (this *OrderController) UpdateOrder() {
+	var orderInfoVo request.OrderInfoVo
+	json.Unmarshal(this.Ctx.Input.RequestBody, &orderInfoVo)
+	common.ConsoleLogs.Info("orderInfoVo=", orderInfoVo)
+	this.Data["json"] = orderInfoVo
+	this.ServeJSON()
+	service.UpdateOrder(orderInfoVo)
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,10 +20,17 @@ func FindLendUserById(id int) interface{} {
 }
 
 
+func FindLendUserAll() interface{} {
+	lendUserList := dao.FindLendUserAll()
+	common.ConsoleLogs.Info(".....lendUserList=", lendUserList)
+	return lendUserList
+}
 
 
-
-
+func UpdateLendUser(lendUserVo request.LendUserVo){
+	lendUser := models.LendUser{Id:lendUserVo.Id,LendId:lendUserVo.LendId,UserName:lendUserVo.UserName,Email:lendUserVo.Email,Age:lendUserVo.Age,IdNo:lendUserVo.IdNo,UserId:lendUserVo.UserId,CreateTime:time.Now(), UpdateTime:time.Now(),Version:lendUserVo.Version}
+	dao.UpdateLendUser(lendUser)
+}
 
 
 

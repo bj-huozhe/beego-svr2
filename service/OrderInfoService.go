@@ -9,7 +9,7 @@ import (
 )
 
 func AddOrderInfo(orderInfoVo request.OrderInfoVo){
-	orderInfo := models.OrderInfo{Name:orderInfoVo.Name,Age:orderInfoVo.Age,Create_time:time.Now(), Update_time:time.Now(),Version:0}
+	orderInfo := models.OrderInfo{Name:orderInfoVo.Name,Age:orderInfoVo.Age,CreateTime:time.Now(), UpdateTime:time.Now(),Version:0}
 	dao.AddOrderInfo(orderInfo)
 }
 
@@ -20,7 +20,16 @@ func FindOrderById(id int) interface{} {
 }
 
 
+func FindOrderAll() interface{} {
+	orderInfoList := dao.FindOrderAll()
+	common.ConsoleLogs.Info(".....orderInfoList=", orderInfoList)
+	return orderInfoList
+}
 
+func UpdateOrder(orderInfoVo request.OrderInfoVo){
+	orderInfo := models.OrderInfo{Id:orderInfoVo.Id,Name:orderInfoVo.Name,Age:orderInfoVo.Age,CreateTime:time.Now(), UpdateTime:time.Now(),Version:orderInfoVo.Version}
+	dao.UpdateOrder(orderInfo)
+}
 
 
 

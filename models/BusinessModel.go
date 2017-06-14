@@ -9,8 +9,8 @@ type OrderInfo struct {
 	Id int  `primary key Id`
 	Name string  `Name`
 	Age int `Age`
-	Create_time time.Time
-	Update_time time.Time
+	CreateTime time.Time
+	UpdateTime time.Time
 	Version int  `version `
 }
 

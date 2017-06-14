@@ -9,7 +9,7 @@ import (
 )
 
 func AddLendInfo(lendInfoVo request.LendInfoVo){
-	lendInfo := models.LendInfo{LendId:lendInfoVo.LendId,RequestContent:lendInfoVo.RequestContent,ResponseContent:lendInfoVo.ResponseContent,CreateTime:time.Now(), UpdateTime:time.Now(),Version:0}
+	lendInfo := models.LendInfo{LendId:lendInfoVo.LendId,RequestContent:lendInfoVo.RequestContent,ResponseContent:lendInfoVo.ResponseContent,Status:lendInfoVo.Status,UserId:lendInfoVo.UserId,CreateTime:time.Now(), UpdateTime:time.Now(),Version:0}
 	dao.AddLendInfo(lendInfo)
 }
 
@@ -20,9 +20,17 @@ func FindLendInfoById(id int) interface{} {
 }
 
 
+func FindLendInfoAll() interface{} {
+	lendInfoList := dao.FindLendInfoAll()
+	common.ConsoleLogs.Info(".....lendInfoList=", lendInfoList)
+	return lendInfoList
+}
 
 
-
+func UpdateLendInfo(lendInfoVo request.LendInfoVo){
+	lendInfo := models.LendInfo{Id:lendInfoVo.Id,LendId:lendInfoVo.LendId,RequestContent:lendInfoVo.RequestContent,ResponseContent:lendInfoVo.ResponseContent,Status:lendInfoVo.Status,UserId:lendInfoVo.UserId,CreateTime:time.Now(), UpdateTime:time.Now(),Version:0}
+	dao.UpdateLendInfo(lendInfo)
+}
 
 
 

@@ -19,10 +19,17 @@ func FindTeamById(id int) interface{} {
 	return teamInfo
 }
 
+func FindTeamAll() interface{} {
+	teamInfoList := dao.FindTeamAll()
+	common.ConsoleLogs.Info(".....teamInfoList=", teamInfoList)
+	return teamInfoList
+}
 
 
-
-
+func UpdateTeam(teamrInfoVo request.TeamInfoVo){
+	teamInfo := models.TeamInfo{Id:teamrInfoVo.Id,TeamName:teamrInfoVo.TeamName,OrderId:teamrInfoVo.OrderId,CreateTime:time.Now(), UpdateTime:time.Now(),Version:teamrInfoVo.Version}
+	dao.UpdateTeam(teamInfo)
+}
 
 
 
