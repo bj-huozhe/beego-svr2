@@ -6,18 +6,14 @@ import (
 	"fmt"
 	"beego-svr2/util"
 	"encoding/json"
-	"golang-test/com/basic/util/uuid"
 )
 
-func Test_AddLendInfo(t *testing.T) {
-	httpUrl := "http://localhost:8100/lend/AddLendInfo"
+func Test_AddLendBank(t *testing.T) {
+	httpUrl := "http://localhost:8100/lendBank/AddLendBank"
 	request := make(map[string]interface{})
 	request["Id"] = 1
-	request["LendId"] = uuid.GetGuid()
-	request["RequestContent"] = "{'name':'abin'}"
-	request["ResponseContent"] = "{'status':'SUCCESS'}"
-	request["UserId"] = 1000
-	request["Status"] = "INIT"
+	request["bankNo"] = "6228480402564890018"
+        request["bankName"] = "ICBC"
 
 	json, err := json.Marshal(request)
 	if err != nil {
@@ -32,29 +28,29 @@ func Test_AddLendInfo(t *testing.T) {
 	fmt.Println("result=", result)
 }
 
-func Test_FindLendInfoById(t *testing.T) {
-	httpUrl := "http://localhost:8100/lend/FindLendInfoById?id=4"
+func Test_FindLendBankById(t *testing.T) {
+	httpUrl := "http://localhost:8100/lendBank/FindLendBankById?id=1"
+	header := make(map[string]string)
+	header["Cookie"] = "JSESSION:1245566"
+	header["Source"] = "BBC"
+	//result := common.HttpPost(request, header, httpUrl)
 	result := common.HttpGet(httpUrl)
 	fmt.Println("result=", result)
 }
 
 
-func Test_FindLendInfoAll(t *testing.T) {
-	httpUrl := "http://localhost:8100/lend/FindLendInfoAll"
+func Test_FindLendBankAll(t *testing.T) {
+	httpUrl := "http://localhost:8100/lendBank/FindLendBankAll?id=59"
 	result := common.HttpGet(httpUrl)
 	fmt.Println("result=", result)
 }
 
-
-func Test_UpdateLendInfo(t *testing.T) {
-	httpUrl := "http://localhost:8100/lend/UpdateLendInfo"
+func Test_UpdateLendBank(t *testing.T) {
+	httpUrl := "http://localhost:8100/lendBank/UpdateLendBank"
 	request := make(map[string]interface{})
 	request["Id"] = 1
-	request["LendId"] = uuid.GetGuid()
-	request["RequestContent"] = "{'name':'abin1'}"
-	request["ResponseContent"] = "{'status':'FAILURE'}"
-	request["UserId"] = 1009
-	request["Status"] = "SUCCESS"
+	request["bankNo"] = "6228480666622220011a"
+        request["bankName"] = "ABC"
 	request["Version"] = 5
 
 	json, err := json.Marshal(request)
@@ -65,10 +61,27 @@ func Test_UpdateLendInfo(t *testing.T) {
 	header := make(map[string]string)
 	header["Cookie"] = "JSESSION:1245566"
 	header["Source"] = "BBC"
-	//result := common.HttpPost(request, header, httpUrl)
 	result := common.HttpPostJson(string(json), header, httpUrl)
 	fmt.Println("result=", result)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

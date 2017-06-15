@@ -27,7 +27,7 @@ func Test_AddLendUser(t *testing.T) {
 
 	header := make(map[string]string)
 	header["Cookie"] = "JSESSION:1245566"
-	header["RRDSource"] = "BBC"
+	header["Source"] = "BBC"
 	//result := common.HttpPost(request, header, httpUrl)
 	result := common.HttpPostJson(string(json), header, httpUrl)
 	fmt.Println("result=", result)
@@ -66,7 +66,7 @@ func Test_UpdateLendUser(t *testing.T) {
 
 	header := make(map[string]string)
 	header["Cookie"] = "JSESSION:1245566"
-	header["RRDSource"] = "BBC"
+	header["Source"] = "BBC"
 	//result := common.HttpPost(request, header, httpUrl)
 	result := common.HttpPostJson(string(json), header, httpUrl)
 	fmt.Println("result=", result)

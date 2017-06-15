@@ -42,6 +42,13 @@ func init() {
 		beego.NSRouter("/UpdateLendUser", &controllers.LendUserController{}, "post:UpdateLendUser"),
 	)
 
-	beego.AddNamespace(order_info_ns, team_info_ns, lend_info_ns, lend_user_ns)
+	lend_bank_ns := beego.NewNamespace("/lendBank",
+		beego.NSRouter("/AddLendBank", &controllers.LendBankController{}, "post:AddLendBank"),
+		beego.NSRouter("/FindLendBankById", &controllers.LendBankController{}, "get:FindLendBankById"),
+		beego.NSRouter("/FindLendBankAll", &controllers.LendBankController{}, "get:FindLendBankAll"),
+		beego.NSRouter("/UpdateLendBank", &controllers.LendBankController{}, "post:UpdateLendBank"),
+	)
+
+	beego.AddNamespace(order_info_ns, team_info_ns, lend_info_ns, lend_user_ns, lend_bank_ns)
 
 }

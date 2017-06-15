@@ -7,11 +7,10 @@ import (
 	"fmt"
 )
 
-func AddOrderInfo(orderInfo models.OrderInfo) {
+func AddLendBank(modelInfo models.LendBank) {
 	instanceDao := orm.NewOrm()
-	instanceDao.Using("trade")
 	err := instanceDao.Begin()
-	affect, err := instanceDao.Insert(&orderInfo)
+	affect, err := instanceDao.Insert(&modelInfo)
 	common.ConsoleLogs.Info("affect=", affect, "err=", err)
 	if err != nil {
 		common.ConsoleLogs.Error("err=", err)
@@ -21,12 +20,11 @@ func AddOrderInfo(orderInfo models.OrderInfo) {
 	}
 }
 
-func FindOrderById(id int) interface{} {
-	common.ConsoleLogs.Info("FindOrderById--id=", id)
+func FindLendBankById(id int) interface{} {
+	common.ConsoleLogs.Info("FindLendBankById--id=", id)
 	instanceDao := orm.NewOrm()
-	instanceDao.Using("default")
 	err := instanceDao.Begin()
-	modelInfo := models.OrderInfo{Id:id}
+	modelInfo := models.LendBank{Id:id}
 	common.ConsoleLogs.Info("modelInfo=", modelInfo)
 	err = instanceDao.Read(&modelInfo)
 	common.ConsoleLogs.Info("modelInfo=", modelInfo)
@@ -48,18 +46,18 @@ func FindOrderById(id int) interface{} {
 //    }
 //}
 
-func FindOrderAll() interface{} {
-	var orderList []models.OrderInfo
+func FindLendBankAll() interface{} {
+	var modelList []models.LendBank
 	instanceDao := orm.NewOrm()
 	err := instanceDao.Begin()
-	instanceDao.QueryTable("order_info").All(&orderList)
-	common.ConsoleLogs.Info("orderList=", orderList)
+	instanceDao.QueryTable("lend_bank").All(&modelList)
+	common.ConsoleLogs.Info("modelList=", modelList)
 	if err != nil {
 		instanceDao.Rollback()
 	} else {
 		instanceDao.Commit()
 	}
-	return orderList
+	return modelList
 }
 
 
@@ -73,18 +71,18 @@ func FindOrderAll() interface{} {
 //}
 
 
-func UpdateOrder(orderInfo models.OrderInfo)  {
-	common.ConsoleLogs.Info("orderInfo=", orderInfo)
+func UpdateLendBank(modelInfo models.LendBank)  {
+	common.ConsoleLogs.Info("modelInfo=", modelInfo)
 	instanceDao := orm.NewOrm()
 	err := instanceDao.Begin()
-	updateInfo := models.OrderInfo{Id:orderInfo.Id}
+	updateInfo := models.LendBank{Id:modelInfo.Id}
 	common.ConsoleLogs.Info("updateInfo=", updateInfo)
 	if instanceDao.Read(&updateInfo) == nil {
-	    updateInfo.Name = orderInfo.Name
-	    updateInfo.Age = orderInfo.Age
-	    updateInfo.CreateTime = orderInfo.CreateTime
-	    updateInfo.UpdateTime = orderInfo.UpdateTime
-	    updateInfo.Version = orderInfo.Version
+	    updateInfo.BankName = modelInfo.BankName
+	    updateInfo.BankNo = modelInfo.BankNo
+	    updateInfo.CreateTime = modelInfo.CreateTime
+	    updateInfo.UpdateTime = modelInfo.UpdateTime
+	    updateInfo.Version = modelInfo.Version
 	    if num, err := instanceDao.Update(&updateInfo); err == nil {
 		fmt.Println(num)
 	    }
