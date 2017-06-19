@@ -64,6 +64,7 @@ func (this *LendBankController) FindLendBankAll() string{
 	this.Ctx.WriteString(result)
 	//return orderInfo
 	//business.Ctx.WriteString(json)
+	//this.ServeJSONP()
 	return result
 }
 
