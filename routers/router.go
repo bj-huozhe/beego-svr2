@@ -46,6 +46,7 @@ func init() {
 		beego.NSRouter("/AddLendBank", &controllers.LendBankController{}, "post:AddLendBank"),
 		beego.NSRouter("/FindLendBankById", &controllers.LendBankController{}, "get:FindLendBankById"),
 		beego.NSRouter("/FindLendBankAll", &controllers.LendBankController{}, "get:FindLendBankAll"),
+		beego.NSRouter("/FindLendBankAllList", &controllers.LendBankController{}, "get:FindLendBankAllList"),
 		beego.NSRouter("/UpdateLendBank", &controllers.LendBankController{}, "post:UpdateLendBank"),
 	)
 

@@ -66,7 +66,11 @@ func Test_UpdateLendBank(t *testing.T) {
 }
 
 
-
+func Test_FindLendBankAllList(t *testing.T) {
+	httpUrl := "http://localhost:8100/lendBank/FindLendBankAllList"
+	result := common.HttpGet(httpUrl)
+	fmt.Println("result=", result)
+}
 
 
 

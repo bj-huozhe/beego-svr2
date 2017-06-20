@@ -77,7 +77,11 @@ func (this *LendBankController) UpdateLendBank() {
 	service.UpdateLendBank(modelInfoVo)
 }
 
-
+func (this *LendBankController) FindLendBankAllList() {
+	modelInfoList := service.FindLendBankAll()
+	this.Data["json"] = modelInfoList
+	this.ServeJSON()
+}
 
 
 
