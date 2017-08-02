@@ -22,6 +22,7 @@ func main() {
 	}
 		// 开启 ORM 调试模式
 	orm.Debug = true
+	beego.Debug()
 	// 自动建表
 	orm.RunSyncdb("default", false, true)
 	// 运行时
